@@ -1,122 +1,170 @@
 # 🛒 ASP.NET Core 9.0 ve PostgreSQL ile Ogani E-Ticaret Sitesi
-Bu repository, M&Y Yazılım Akademi bünyesinde yaptığım on altıncı proje olan ASP.NET Core 9.0 ve PostgreSQL ile Ogani E-Ticaret Sitesi projesini içermektedir. Bu eğitimde bana yol gösteren Murat Yücedağ'a çok teşekkür ederim.
 
-Bu proje, ASP.NET Core 9.0 ve PostgreSQL kullanılarak geliştirilmiş, temel e-ticaret işlevlerini barındıran modern bir web uygulamasıdır. Proje tek katmanlı bir yapıda, folder structure prensiplerine uygun olarak tasarlanmış ve gereksiz sınıflar kullanılmadan sade, okunabilir bir mimari anlayışıyla geliştirilmiştir. Geliştirme sürecinde performans, sürdürülebilirlik ve kod okunabilirliği ön planda tutulmuştur.
-
-Sistem, sipariş istatistikleri, ürün listeleme, satış tahmini ve veri analitiği gibi modülleri bir araya getirir. Ayrıca, ML.NET ile satış tahmini gibi yapay zekâ destekli özellikleriyle, klasik stok yönetimi uygulamalarının ötesinde bir kullanıcı deneyimi sunar.
-
-Veri tabanı olarak tamamen ücretsiz olan PostgreSQL üzerinde ilişkisel tablolar tasarlanmış ve Ürünler, Kategoriler, Siparişler, Müşteriler gibi temel entity’ler için dinamik veri yapıları oluşturulmuştur. Bu sayede proje sadece bir demo değil, gerçek bir sektörel uygulamaya dönüştürülebilecek nitelikte güçlü bir temel kazanmıştır. Projede eksiklikler muhakkak vardır. Bu bir eğitim projesidir.
+Bu repository, M&Y Yazılım Akademi kapsamındaki on altıncı proje olan Ogani E-Ticaret Sitesi uygulamasını içerir. Proje ASP.NET Core 9.0 (MVC) ve PostgreSQL ile geliştirilmiş, sade ve okunabilir tek katmanlı bir mimari ile tasarlanmıştır.
 
 ---
 
-### ⚙️ Proje Özellikleri
-- 🧩 **Veritabanı Yapısı:** Category, Product, Customer, Order ve Log tabloları PostgreSQL üzerinde yapılandırıldı.
-- 🐘 **PostgreSQL Entegrasyonu:** Tüm veriler PostgreSQL üzerinde saklanmakta, güvenli CRUD işlemleri yapılmaktadır.
-- 🍎 **Ürün Verisi:** Yapay Zeka yardımıyla oluşturulan 250 adet yiyecek ürünü (meyve, sebze, içecek, tatlı, tuzlu vb.) veritabanına insert sorgusu olarak eklendi.
-- 👤 **Müşteri Verisi:**  Yapay Zeka kullanılarak hazırlanan 500 adet Türkçe müşteri verisi PostgreSQL’e aktarıldı.
-- 📦 **Sipariş Verisi:** 100.000 adet sipariş verisi CSV dosyası olarak hazırlanıp sisteme yüklendi.
-- 🧠 **Admin Paneli:** CRUD işlemlerinin yapılabildiği modern bir yönetim paneli oluşturuldu.
-- 📊 **Dashboard & Analitik:** Admin panelinde widget’lar, istatistik kartları, tablo ve grafikler içeren bir dashboard yer almakta.
-- 🍳 **Yemek Öneri Özelliği (AI Integration):** Kullanıcı elindeki malzemeleri girerek Rapid API üzerinden yapay zekâ destekli yemek önerileri alabiliyor.
-- 💬 **WhatsApp Entegrasyonu:** Ana Sayfada bulunan telefon numarasından WhatsApp Web üzerinden iletişim başlatılabiliyor.
-- 📈 **Sipariş Tahmin Analizi:** ML.NET kullanılarak 2025 verilerine göre 2026’nın ilk 3 ayına ait şehir bazlı sipariş tahmini yapılmakta.
-- 🥇 **Müşteri Segmentasyonu:**<br>
-Altın Müşteriler: 210+ sipariş<br>
-Gümüş Müşteriler: 180-209 sipariş<br>
-Bronz Müşteriler: 179 dan daha az sipariş<br>
-Bu segment dağılımı dashboard üzerinde pie chart olarak gösterilmektedir.
-- 🗺️ **Harita Entegrasyonu:** Leaflet kullanılarak Türkiye haritası üzerinde şehir bazlı sipariş yoğunluğu heatmap olarak gösterilmektedir.
-Şehir seçildiğinde toplam sipariş sayısı, ortalama sipariş tutarı ve en çok tercih edilen kategori bilgileri görüntülenir.
-- 🧾 **Loglama Sistemi:** Admin panelindeki her CRUD işlemi (ekleme, silme, güncelleme) Log tablosuna kaydedilir.
-Log tablosunda şu sütunlar bulunur: LogId, UserName, ActionType, Entity, Description, Date.<br>
-Son işlemler Admin Paneli'nde “Yapılan İşlemler” bölümünde listelenir.
+## 🚀 Özellikler
+
+- 🧩 Veritabanı: Category, Product, Customer, Order ve Log tabloları (PostgreSQL)
+- 🐘 PostgreSQL entegrasyonu ve güvenli CRUD işlemleri
+- 🍎 Ürün verisi: AI destekli 250+ yiyecek ürünü insert ile eklendi
+- 👤 Müşteri verisi: 500+ Türkçe müşteri kaydı
+- 📦 Sipariş verisi: 100.000 sipariş CSV’den içeri aktarıldı
+- 🧠 Admin Paneli: Modern CRUD arayüzü
+- 📊 Dashboard & Analitik: Widget, istatistik kartları, grafikler
+- 🍳 Yemek öneri özelliği: RapidAPI üzerinden AI destekli öneriler
+- 💬 WhatsApp entegrasyonu: Ana sayfadan WhatsApp Web ile iletişim
+- 📈 Sipariş tahmini: ML.NET ile 2026 ilk 3 ay, şehir bazlı tahmin
+- 🥇 Müşteri segmentasyonu:
+  - Altın: 210+ sipariş
+  - Gümüş: 180–209 sipariş
+  - Bronz: 179 veya altı
+  Pie chart ile gösterim
+- 🗺️ Harita entegrasyonu: Leaflet ile Türkiye şehir bazlı heatmap, toplam sipariş, ortalama tutar ve en çok tercih edilen kategori
+- 🧾 Loglama: CRUD işlemlerinin Log tablosuna kaydı (LogId, UserName, ActionType, Entity, Description, Date)
 
 ---
 
-## 🚀 Kullandığım Teknolojiler
+## 🧱 Mimari ve Teknolojiler
 
-- 💻 ASP.NET Core 9.0 (MVC) - Modern .NET altyapısı ve güçlü backend yapısı
-- 🐘 PostgreSQL - 	İlişkisel veritabanı yönetimi
-- 💎 Entity Framework Core - ORM aracı ile veritabanı işlemleri
-- 🔄 AutoMapper - Entity–DTO dönüşümleri için
-- 🤖 ML.NET - Satış tahmini algoritmaları için
-- 🌐 RapidAPI - AI destekli sohbet entegrasyonu
-- 🧱 Tek Katmanlı Mimari - Temiz, modüler ve ölçeklenebilir yapı
-- 🧼 Clean Code Prensipleri & Folder Structure Düzeni
-- 🧩 ViewComponent - Tekrarlayan UI bileşenlerinin yönetimi
-- 🎨 HTML5, CSS3, Bootstrap, JavaScript - Modern ve responsive UI tasarımı
+- 💻 ASP.NET Core 9.0 (MVC)
+- 🐘 PostgreSQL
+- 💎 Entity Framework Core (ORM)
+- 🔄 AutoMapper (Entity ↔ DTO)
+- 🤖 ML.NET (tahminleme)
+- 🌐 RapidAPI (AI entegrasyonu)
+- 🧱 Tek katmanlı mimari, temiz kod ve folder structure prensipleri
+- 🧩 ViewComponent
+- 🎨 HTML5, CSS3, Bootstrap, JavaScript
+
+Proje yapısı örneği:
+
+```
+15PC2_ECommerce.sln
+15PC2_ECommerce/
+  Program.cs
+  appsettings.json
+  Context/
+  Controllers/
+  DTOs/
+  Entities/
+  Mapping/
+  Services/
+  ViewComponents/
+  Views/
+  wwwroot/
+```
 
 ---
 
-## 🧭 Proje Bölümleri
+## 🧭 Modüller
 
 ### 🏠 Ana Sayfa
-Kullanıcılar bu bölümde:
-- E-Ticaret sitesinde yer alan ürünleri kategori bazında görüntüleyebilir.
-- Ürünleri kategoriye ve fiyat aralığına göre filtreleyebilir.
-- Ürün detaylarını inceleyebilir ve ürünlerle ilgili bilgilere kolayca ulaşabilir.
-- Bize Ulaşın bölümünden yöneticiye mesaj gönderebilir.
+- Ürünleri kategori bazında listeleme
+- Fiyat ve kategori filtreleri
+- Ürün detayları
+- Bize Ulaşın formu
 
 ### 🧮 Admin Paneli
-Yönetici bu panelde:
-- Kategori, ürün, müşteri ve sipariş gibi varlıklar üzerinde CRUD (Create, Read, Update, Delete) işlemleri gerçekleştirebilir.
-- Sipariş verilerini analiz ederek tahminleme (ML.NET ile) yapabilir.
-- Sipariş istatistiklerini Türkiye haritası üzerinden görüntüleyebilir.
-- Girilen malzemelere göre yemek önerileri almak için Rapid API entegrasyonunu kullanabilir.
+- Category, Product, Customer, Order için CRUD
+- ML.NET ile sipariş tahmini
+- Leaflet ile şehir bazlı sipariş yoğunluğu
+- RapidAPI ile malzemeye göre yemek önerileri
+- Log kayıtları ve “Yapılan İşlemler” listesi
 
 ---
 
-## 💡 Genel Değerlendirme
-Ogani E-Ticaret Sitesi, klasik bir e-ticaret sitesi projesinin ötesinde; AI destekli tahmin ve modern katmanlı mimarisi ile sektörel düzeyde bir altyapı sunar.
-Proje eğitim amaçlı olarak geliştirilmiştir, ancak mevcut mimarisi ile gerçek bir işletmede uygulanabilir düzeydedir.
+## ⚙️ Kurulum ve Çalıştırma
+
+1. PostgreSQL veritabanını oluşturun ve bağlantı bilgisini `appsettings.json` dosyasına girin:
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Host=localhost;Port=5432;Database=OganiDb;Username=postgres;Password=your_password"
+     }
+   }
+   ```
+2. Gerekli NuGet paketlerini yükleyin:
+   - Microsoft.EntityFrameworkCore
+   - Npgsql.EntityFrameworkCore.PostgreSQL
+   - AutoMapper.Extensions.Microsoft.DependencyInjection
+   - Microsoft.ML
+3. Migration ve veritabanı güncellemelerini uygulayın:
+   - dotnet tool restore
+   - dotnet ef migrations add InitialCreate
+   - dotnet ef database update
+4. Uygulamayı çalıştırın:
+   - dotnet run
+
+Not: Kurulum adımları proje yapılandırmanıza göre değişebilir. `Program.cs` ve `Context/AppDbContext.cs` içinde gerekli servis ve context konfigürasyonlarını kontrol edin.
 
 ---
 
-## 🖼️ Projeden Ekran Görüntüleri
+## 🔄 Veri Hazırlığı
 
-### ➡️ Ana Sayfa
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Default-Index-2025-10-25-15_34_56.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Default-Products-2025-10-25-15_35_54.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Default-ProductDetail-73-2025-10-25-15_35_38.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Default-Contact-2025-10-25-15_36_57.png" alt="image alt">
-</div>
-<br/>
+- Ürün ve müşteri verileri AI destekli olarak üretilmiştir.
+- 100.000 sipariş CSV dosyası ETL ile sisteme yüklenmiştir.
+- ML.NET modelleri 2025 verileri ile eğitilerek 2026 ilk 3 ay için şehir bazlı tahmin üretir.
 
-### ➡️ Admin Paneli
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Dashboard-Index-2025-10-25-15_38_09.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss2/screencapture-localhost-7292-Category-Index-2025-10-25-20_16_36.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss2/screencapture-localhost-7292-Customer-Index-2025-10-25-20_18_35.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Customer-CreateCustomer-2025-10-25-15_39_24.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Customer-UpdateCustomer-255-2025-10-25-15_39_46.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss2/screencapture-localhost-7292-Product-Index-2025-10-25-20_19_22.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss2/screencapture-localhost-7292-Order-Index-2025-10-25-20_19_10.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Recipe-Index-2025-10-25-15_48_34.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss/screencapture-localhost-7292-Forecast-Index-2025-10-25-15_45_31.png" alt="image alt">
-</div>
-<div align="center">
-  <img src="https://github.com/melihcolak0/OganiECommerce/blob/08f36fe3dae5060d23bc6e1395bbe9102e6af9ef/ss2/screencapture-localhost-7292-Log-Index-2025-10-25-20_19_00.png" alt="image alt">
-</div>
+---
+
+## 📊 Dashboard ve Analitik
+
+- Müşteri segmentasyonu (Altın/Gümüş/Bronz) pie chart
+- Şehir seçimine göre toplam sipariş, ortalama tutar, en popüler kategori
+- Heatmap ile yoğunluk haritası (Leaflet)
+
+---
+
+## 🧾 Loglama
+
+- Admin panelindeki her CRUD işlemi Log tablosuna kayıt edilir.
+- Son işlemler panelde listelenir.
+
+---
+
+## 📁 Önemli Dizimler ve Dosyalar
+
+- `Context/AppDbContext.cs`: EF Core DbContext ve PostgreSQL konfigürasyonu
+- `Controllers/*Controller.cs`: MVC controller’ları
+- `Entities/*.cs`: Temel domain entity’leri
+- `DTOs/*`: Veri transfer nesneleri
+- `Mapping/MappingProfile.cs`: AutoMapper profilleri
+- `Services/*`: İş mantığı servisleri
+- `Views/*`: Razor view’lar
+- `wwwroot/*`: Statik dosyalar
+
+---
+
+## 🔐 Ortam Değişkenleri ve Ayarlar
+
+- `appsettings.json` ve `appsettings.Development.json` içinde:
+  - ConnectionStrings
+  - Logging
+  - RapidAPI anahtarı (güvenlik için gizli tutun ve kullanıcı gizliliğini koruyun)
+
+---
+
+## 🧪 Test ve Doğrulama
+
+- Controller ve service katmanı için birim testleri önerilir.
+- Veri migrasyonları sonrası temel CRUD ve tahmin akışını doğrulayın.
+
+---
+
+## 📸 Ekran Görüntüleri
+
+`ss/` ve `ss2/` klasörlerinde örnek ekran görüntüleri mevcuttur.
+
+---
+
+## 📄 Lisans
+
+Bu proje eğitim amaçlıdır. Ticari kullanım öncesi gerekli düzenlemeleri yapınız.
+
+---
+
+## 🙏 Teşekkür
+
+Eğitim sürecindeki katkıları için Murat Yücedağ’a teşekkürler.
